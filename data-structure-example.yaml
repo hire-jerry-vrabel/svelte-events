@@ -1,0 +1,327 @@
+# Rogers Park Local Events - Data Structure Example
+# This shows how to organize your event data for a Vite/Svelte/TS app
+
+# File organization:
+# data/
+#   ├── events/
+#   │   ├── 2025-06.json      # All events in June 2025
+#   │   ├── 2025-07.json      # All events in July 2025
+#   │   └── index.json        # Metadata: "latest_update", "total_events"
+#   ├── venues.json           # All venues (slower to change)
+#   ├── organizers.json       # All organizers
+#   └── categories.json       # Event category definitions
+
+---
+# Example: venues.json
+venues:
+  - id: "venue-lakefront-park"
+    name: "Lakefront Park Rogers Park"
+    type: "park"
+    location:
+      address: "6000 N Lake Shore Drive"
+      latitude: 41.9875
+      longitude: -87.2567
+      city: "Chicago"
+      neighborhood: "Rogers Park"
+      zipCode: "60626"
+    description: "Large public park with playgrounds, sports facilities, and green space along Lake Michigan"
+    capacity: 1000
+    wheelchairAccessible: true
+    petsAllowed: true
+    parking: "free"
+    hours: "Sunrise to sunset daily"
+    website: "https://www.chicagoparkdistrict.com"
+    amenities: ["restrooms", "parking", "playground", "sports_courts"]
+    image: "https://example.com/lakefront-park.jpg"
+
+  - id: "venue-artifact-events"
+    name: "Artifact Events"
+    type: "commercial_storefront"
+    location:
+      address: "1900 W Diversey Ave"
+      latitude: 41.9335
+      longitude: -87.6834
+      city: "Chicago"
+      neighborhood: "Rogers Park"
+      zipCode: "60614"
+    description: "Community event space and vintage marketplace"
+    capacity: 200
+    wheelchairAccessible: true
+    petsAllowed: false
+    parking: "street"
+    hours: "10am-6pm Tue-Sun, closed Mon"
+    phone: "(773) 555-0123"
+    website: "https://artifacteventspace.com"
+    amenities: ["restrooms", "wifi", "accessibility"]
+    image: "https://example.com/artifact.jpg"
+
+  - id: "venue-coffee-co"
+    name: "Local Coffee Co"
+    type: "coffee_shop"
+    location:
+      address: "6300 N Broadway"
+      latitude: 41.9900
+      longitude: -87.2701
+      city: "Chicago"
+      neighborhood: "Rogers Park"
+      zipCode: "60626"
+    description: "Neighborhood coffee shop with event space in back"
+    capacity: 60
+    wheelchairAccessible: false
+    petsAllowed: true
+    parking: "street"
+    hours: "6am-9pm daily"
+    phone: "(773) 555-0456"
+    website: "https://localcoffeeco.com"
+    amenities: ["wifi", "restrooms", "outdoor_seating"]
+    image: "https://example.com/coffee-co.jpg"
+
+---
+# Example: organizers.json
+organizers:
+  - id: "org-rogers-park-arts-collective"
+    name: "Rogers Park Arts Collective"
+    type: "nonprofit"
+    bio: "Grassroots nonprofit supporting local artists and cultural events"
+    email: "info@rogerspace.org"
+    phone: "(773) 555-9999"
+    website: "https://rogerspace.org"
+    social:
+      instagram: "rogerspace"
+      facebook: "rogerspace"
+      twitter: "rogerspace"
+    image: "https://example.com/org-logo-rpac.jpg"
+    verified: true
+    createdAt: "2020-01-01"
+
+  - id: "org-local-dj-network"
+    name: "Local DJ Network"
+    type: "community_group"
+    bio: "Connected DJs and electronic music enthusiasts in Rogers Park"
+    email: "contact@localdjnetwork.org"
+    social:
+      instagram: "localdjnetwork"
+    verified: false
+    createdAt: "2022-06-01"
+
+  - id: "org-rogers-park-chamber"
+    name: "Rogers Park Chamber of Commerce"
+    type: "business"
+    bio: "Supporting local businesses and economic development"
+    website: "https://rogerparkchamber.org"
+    phone: "(773) 555-7777"
+    verified: true
+    createdAt: "2015-01-01"
+
+---
+# Example: categories.json
+categories:
+  - id: "music"
+    name: "Music"
+    emoji: "🎵"
+    color: "#FF6B6B"
+    description: "Concerts, DJ sets, music festivals, open mics"
+
+  - id: "visual_arts"
+    name: "Visual Arts"
+    emoji: "🎨"
+    color: "#4ECDC4"
+    description: "Gallery shows, exhibitions, street art events"
+
+  - id: "food_beverage"
+    name: "Food & Beverage"
+    emoji: "🍽️"
+    color: "#FFE66D"
+    description: "Farmer's markets, food festivals, cooking classes, pop-ups"
+
+  - id: "sports_recreation"
+    name: "Sports & Recreation"
+    emoji: "⚽"
+    color: "#95E1D3"
+    description: "Pickup games, fitness classes, sports leagues, outdoor activities"
+
+  - id: "education_workshop"
+    name: "Workshop"
+    emoji: "🎓"
+    color: "#C7CEEA"
+    description: "Classes, seminars, skill-building, mentorship"
+
+  - id: "community_meeting"
+    name: "Community"
+    emoji: "🤝"
+    color: "#FFD3B6"
+    description: "Town halls, community meetings, neighborhood initiatives"
+
+  - id: "theater_performance"
+    name: "Theater"
+    emoji: "🎭"
+    color: "#FFAAA5"
+    description: "Plays, improv, comedy, performance art"
+
+  - id: "nightlife"
+    name: "Nightlife"
+    emoji: "🌙"
+    color: "#2C3E50"
+    description: "Bars, late-night events, clubs, lounges"
+
+---
+# Example: 2025-06.json (Single month of events)
+events:
+  - id: "indie-dance-party-june-2025"
+    title: "Indie Dance Party @ The Lakefront Room"
+    description: |
+      Join us for an evening of indie, alternative, and lo-fi beats.
+      Local DJs spinning vinyl. All ages welcome. Free entry.
+      No cover charge. Cash bar.
+    shortDescription: "Local indie DJs, all ages, free entry"
+    categories:
+      - "music"
+      - "nightlife"
+      - "community_meeting"
+    status: "published"
+
+    times:
+      - date: "2025-06-21"
+        startTime: "21:00"
+        endTime: "23:59"
+        timezone: "America/Chicago"
+
+    recurrence:
+      frequency: "weekly"
+      daysOfWeek: [5]  # Friday
+      endDate: "2025-12-31"
+
+    venueId: "venue-lakefront-park"
+    isOnline: false
+    isHybrid: false
+    organizerId: "org-rogers-park-arts-collective"
+    coOrganizers:
+      - "org-local-dj-network"
+
+    capacity: 150
+    costType: "free"
+    image: "https://example.com/indie-dance.jpg"
+    tags:
+      - "vinyl"
+      - "local-djs"
+      - "indie"
+      - "22-district"
+    ageRestriction: "all_ages"
+
+    wheelchairAccessible: true
+    publicTransit: "CTA Red Line (Morse Ave), #36 Broadway"
+    foodAvailable: true
+    website: "https://rogerspace.org/events/indie-dance"
+    email: "events@rogerspace.org"
+    instagram: "@rogerspace"
+
+    createdAt: "2025-05-01T00:00:00Z"
+    publishedAt: "2025-05-15T00:00:00Z"
+    createdBy: "org-rogers-park-arts-collective"
+
+  - id: "farmers-market-june-saturdays"
+    title: "Rogers Park Farmers Market"
+    description: "Fresh produce from local farmers. Seeds, honey, baked goods, and artisan products."
+    shortDescription: "Seasonal produce and local goods every Saturday"
+    categories:
+      - "food_beverage"
+      - "community_meeting"
+    status: "published"
+
+    times:
+      - date: "2025-06-07"
+        startTime: "08:00"
+        endTime: "12:00"
+        timezone: "America/Chicago"
+      - date: "2025-06-14"
+        startTime: "08:00"
+        endTime: "12:00"
+        timezone: "America/Chicago"
+      - date: "2025-06-21"
+        startTime: "08:00"
+        endTime: "12:00"
+        timezone: "America/Chicago"
+      - date: "2025-06-28"
+        startTime: "08:00"
+        endTime: "12:00"
+        timezone: "America/Chicago"
+
+    recurrence:
+      frequency: "weekly"
+      daysOfWeek: [6]  # Saturday
+      endDate: "2025-10-31"
+
+    venueId: "venue-lakefront-park"
+    isOnline: false
+    isHybrid: false
+    organizerId: "org-rogers-park-chamber"
+
+    costType: "free"
+    image: "https://example.com/farmers-market.jpg"
+    tags:
+      - "farmers-market"
+      - "produce"
+      - "local"
+    ageRestriction: "all_ages"
+
+    wheelchairAccessible: true
+    publicTransit: "CTA #36 Broadway, Red Line (Morse Ave)"
+    foodAvailable: true
+
+    createdAt: "2025-04-01T00:00:00Z"
+    publishedAt: "2025-04-15T00:00:00Z"
+    createdBy: "org-rogers-park-chamber"
+
+  - id: "coffee-shop-open-mic-june"
+    title: "Coffee & Poets Open Mic"
+    description: "Local poets, spoken word, and musicians. 10-minute slots. Sign up at 7pm, show starts at 7:30pm."
+    shortDescription: "Poetry and music open mic every Thursday"
+    categories:
+      - "literature"
+      - "music"
+    status: "published"
+
+    times:
+      - date: "2025-06-05"
+        startTime: "19:00"
+        endTime: "21:00"
+        timezone: "America/Chicago"
+      - date: "2025-06-12"
+        startTime: "19:00"
+        endTime: "21:00"
+        timezone: "America/Chicago"
+      - date: "2025-06-19"
+        startTime: "19:00"
+        endTime: "21:00"
+        timezone: "America/Chicago"
+      - date: "2025-06-26"
+        startTime: "19:00"
+        endTime: "21:00"
+        timezone: "America/Chicago"
+
+    recurrence:
+      frequency: "weekly"
+      daysOfWeek: [4]  # Thursday
+      endDate: "2025-12-31"
+
+    venueId: "venue-coffee-co"
+    isOnline: false
+    isHybrid: false
+    organizerId: "org-rogers-park-arts-collective"
+
+    capacity: 60
+    costType: "free"
+    image: "https://example.com/open-mic.jpg"
+    tags:
+      - "poetry"
+      - "open-mic"
+      - "community"
+    ageRestriction: "all_ages"
+
+    wheelchairAccessible: false  # Shop has steps
+    foodAvailable: true  # Coffee shop
+
+    email: "openmics@rogerspace.org"
+    createdAt: "2025-03-01T00:00:00Z"
+    publishedAt: "2025-03-15T00:00:00Z"
+    createdBy: "org-rogers-park-arts-collective"
